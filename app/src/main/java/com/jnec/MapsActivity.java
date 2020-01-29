@@ -121,7 +121,7 @@ getDriverLocation();
     private ValueEventListener driverLocationRefListener;
 
     private void getDriverLocation() {
-        driverLocationRef = FirebaseDatabase.getInstance().getReference().child("Acyiveusers").child("sdjfhsdhgsuyegfsdjfsjy").child("l");
+        driverLocationRef = FirebaseDatabase.getInstance().getReference().child("ActiveUsers").child("sdjfhsdhgsuyegfsdjfsjssy").child("l");
         driverLocationRefListener = driverLocationRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -136,10 +136,11 @@ getDriverLocation();
                         locationLng = Double.parseDouble(map.get(1).toString());
                     }
                     LatLng driverLatLng = new LatLng(locationLat, locationLng);
-                    if (mDriverMarker != null) {
-                        mDriverMarker.remove();
-                    }
-
+//                    if (mDriverMarker != null) {
+//                        mDriverMarker.remove();
+//                    }
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(driverLatLng));
+                    mMap.animateCamera(CameraUpdateFactory.zoomTo(19));
                     mDriverMarker = mMap.addMarker(new MarkerOptions().position(driverLatLng).title("your driver"));
                 }
 
@@ -157,14 +158,14 @@ getDriverLocation();
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(1000);
-        mLocationRequest.setFastestInterval(1000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+//        mLocationRequest = new LocationRequest();
+//        mLocationRequest.setInterval(1000);
+//        mLocationRequest.setFastestInterval(1000);
+//        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//            return;
+//        }
+//        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
     }
 
     @Override
